@@ -10,7 +10,7 @@ const bookSchema = new Schema({
     type: String,
     required: true,
   },
-  body: {
+  shortdesc: {
     type: String,
     required: true
   },

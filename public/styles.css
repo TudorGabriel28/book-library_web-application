@@ -74,38 +74,34 @@ h3 {
 .details {
   position: relative;
 }
-.delete {
-  position: absolute;
-  top: 0;
-  right: 0;
-  border-radius: 50%;
-  padding: 8px;
-}
-.delete:hover {
-  cursor: pointer;
-  box-shadow: 1px 2px 3px rgba(0, 0, 0, 0.2);
-}
 
 /* create styles */
-.create-book form {
+.create-book form,
+.edit-book form {
+  position: relative;
   max-width: 400px;
   margin: 0 auto;
 }
 .create-book input,
-.create-book textarea {
+.create-book textarea,
+.edit-book input,
+.edit-book textarea {
   display: block;
   width: 100%;
   margin: 10px 0;
   padding: 8px;
 }
-.create-book label {
+.create-book label,
+.edit-book label {
   display: block;
   margin-top: 24px;
 }
 textarea {
   height: 120px;
 }
-.create-book button {
+.create-book button,
+.edit-book button,
+.delete {
   margin-top: 20px;
   background: crimson;
   color: white;
@@ -113,4 +109,15 @@ textarea {
   border: 0;
   font-size: 1.2em;
   cursor: pointer;
+}
+
+.delete {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  background: #222;
+}
+.delete:hover {
+  cursor: pointer;
+  box-shadow: 1px 2px 3px rgba(0, 0, 0, 0.2);
 }
