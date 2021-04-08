@@ -2,6 +2,23 @@
 <%- include("./partials/head.ejs") %>
 
 <body>
+
+  <style>
+  
+  .feedback-positive::before {
+    content: "\f164";
+    font-family: "Font Awesome 5 Free";
+    font-weight: 900;
+    color: #66bf64;
+  }
+  .feedback-negative::before {
+    content: "\f165";
+    font-family: "Font Awesome 5 Free";
+    font-weight: 900;
+    color: rgb(255, 85, 85);
+  }
+  </style>
+
   <%- include("./partials/nav.ejs") %>
 
   <div class="books content">
@@ -12,6 +29,15 @@
         <a class="single" href="/books/<%= book._id %>">
           <h3 class="title"><%= book.title %></h3>
           <p class="author"><%= book.author %></p>
+          <%if( Math.round((book.rating * 100)/5) < 50 ) { %>
+            <div class="feedback-negative">
+            <%= Math.round((book.rating * 100)/5) %>% Negative Feedback
+            </div>
+          <% } else { %>
+            <div class="feedback-positive">
+              <%= Math.round((book.rating * 100)/5) %>% Positive Feedback
+            </div>
+          <% } %>
         </a>
       <% }) %>
     <% } else { %>
@@ -21,5 +47,13 @@
   </div>
 
   <%- include("./partials/footer.ejs") %>
+
+  <script>
+    
+    
+
+  
+    
+  </script>
 </body>
 </html>

@@ -10,9 +10,13 @@ const bookSchema = new Schema({
     type: String,
     required: true,
   },
-  shortdesc: {
+  rating: {
+    type: Number,
+    required: true,
+  },
+  description: {
     type: String,
-    required: true
+    required: true,
   },
 }, { timestamps: true });
 

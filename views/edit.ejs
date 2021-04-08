@@ -10,11 +10,15 @@
       <input type="text" id="title" name="title" value="<%=book.title%>" required>
       <label for="author">Book author:</label>
       <input type="text" id="author" name="author" value="<%=book.author%>" required>
-      <label for="body">Book body:</label>
-      <textarea id="body" name="body" required><%=book.body%></textarea>
+      <div class="form-group">
+        <label for="rating">Rating:</label>
+        <input type="number" value="<%= book.rating %>" step="0.1" max="5" placeholder="Rate 1 - 5" required>
+      </div>
+      <label for="description">Book description:</label>
+      <textarea id="description" name="description" required><%=book.description%></textarea>
       <button>Save Changes</button>
 
-      <a class="delete" data-doc="<%= book._id %>">Delete Book</a>
+      <a class="delete-btn" data-doc="<%= book._id %>">Delete Book</a>
     </form>
 
     
@@ -23,7 +27,7 @@
   <%- include("./partials/footer.ejs") %>
 
     <script>
-    const delBtn = document.querySelector('a.delete');
+    const delBtn = document.querySelector('a.delete-btn');
 
     delBtn.addEventListener('click', (e) => {
       const endpoint = `/books/${delBtn.dataset.doc}`;

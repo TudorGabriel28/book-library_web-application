@@ -48,7 +48,6 @@ const book_edit_get = (req, res) => {
 }
 
 const book_edit_post = (req, res) => {
-  console.log(req.body);
   const id = req.params.id;
   Book.findByIdAndUpdate(id, req.body)
     .then(result => {
