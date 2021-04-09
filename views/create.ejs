@@ -18,10 +18,15 @@
       </div>
       <label for="description">Book description:</label>
       <textarea id="description" name="description" required></textarea>
+      <div>
+        <label>Cover</label>
+        <input type="file" name="cover" class="filepond">
+      </div>
       <button>Submit</button>
     </form>
   </div>
 
   <%- include("./partials/footer.ejs") %>
+
 </body>
 </html>

@@ -1,4 +1,5 @@
 const Book = require('../models/book');
+const imageMimeTypes = ['image/jpeg', 'image/png', 'images/gif']
 
 const book_index = (req, res) => {
   
@@ -56,7 +57,7 @@ const book_create_get = (req, res) => {
 
 const book_create_post = (req, res) => {
   const book = new Book(req.body);
-  console.log(req.body);
+  saveCover(book, req.body.cover)
   book.save()
     .then(result => {
       res.redirect('/books');
@@ -64,6 +65,7 @@ const book_create_post = (req, res) => {
     .catch(err => {
       console.log(err);
     });
+  
 }
 
 const book_edit_get = (req, res) => {
@@ -79,7 +81,7 @@ const book_edit_get = (req, res) => {
 
 const book_edit_post = (req, res) => {
   const id = req.params.id;
-  console.log(req.body);
+  
   Book.findByIdAndUpdate(id, req.body)
     .then(result => {
       res.redirect('/books');
@@ -98,6 +100,15 @@ const book_delete = (req, res) => {
     .catch(err => {
       console.log(err);
     });
+}
+
+function saveCover(book, coverEncoded) {
+  if (coverEncoded == null) return
+  const cover = JSON.parse(coverEncoded)
+  if (cover != null && imageMimeTypes.includes(cover.type)) {
+    book.coverImage = new Buffer.from(cover.data, 'base64')
+    book.coverImageType = cover.type
+  }
 }
 
 
