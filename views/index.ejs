@@ -21,38 +21,74 @@
 
   <%- include("./partials/nav.ejs") %>
 
-  <div class="books content">
-    <h2>All books</h2>
-
-    <% if (books.length > 0) { %>
-      <% books.forEach(book => { %>
-        <a class="single" href="/books/<%= book._id %>">
-          <h3 class="title"><%= book.title %></h3>
-          <p class="author"><%= book.author %></p>
-          <%if( Math.round((book.rating * 100)/5) < 50 ) { %>
-            <div class="feedback-negative">
-            <%= Math.round((book.rating * 100)/5) %>% Negative Feedback
-            </div>
-          <% } else { %>
-            <div class="feedback-positive">
-              <%= Math.round((book.rating * 100)/5) %>% Positive Feedback
-            </div>
-          <% } %>
-        </a>
-      <% }) %>
-    <% } else { %>
-      <p>There are no books to display...</p>
-    <% } %>
+  
+  <div class="main-container">
+    <form id="sort" action="/books" method="GET">
+      <div class="sort">
+        <select  name="sortby" onchange="myFunction()" >
+            <option value="0" disabled selected>Sort By</option>
+            <option value="createdAt" >Date Created</option>
+            <option value="title" >Title</option>
+            <option value="author" >Author</option>
+            <option value="rating" >Rating</option>
+          </select>
+      </div>
+    </form>
     
+
+    <div class="books content">
+      <% if(category) { %>
+        <h2><%= category %></h2>
+      <% } else { %>
+        <h2>All books</h2>
+      <% } %>
+      
+  
+      <% if (books.length > 0) { %>
+        <% 
+          books.forEach(book => { %>
+            <a class="single" href="/books/<%= book._id %>">
+              <h3 class="title"><%= book.title %></h3>
+              <p class="author"><%= book.author %></p>
+              <p class="category"><%= book.category %></p>
+              <%if( Math.round((book.rating * 100)/5) < 50 ) { %>
+                <div class="feedback-negative">
+                <%= Math.round((book.rating * 100)/5) %>% Negative Feedback
+                </div>
+              <% } else { %>
+                <div class="feedback-positive">
+                  <%= Math.round((book.rating * 100)/5) %>% Positive Feedback
+                </div>
+              <% } %>
+            </a>
+          <% }) %>
+
+          <div class="categories-container">
+            <%
+              if(!search) {
+                var categories = []; 
+                books.forEach(book => {
+                  if((categories.includes(book.category)) == false && book.category != category) {
+                    categories.push(book.category) %>
+                    <a href="/books?category=<%= book.category %>" class="category"><%= book.category %></a> 
+            <% }})} %>
+                  
+          </div>
+          
+      <% } else { %>
+        <p>There are no books to display...</p>
+      <% } %>
+      
+    </div>
   </div>
+  
 
   <%- include("./partials/footer.ejs") %>
 
   <script>
-    
-    
-
-  
+    function myFunction() {
+      document.getElementById('sort').submit();
+    }
     
   </script>
 </body>

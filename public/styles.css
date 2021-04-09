@@ -59,6 +59,10 @@ h3 {
   margin-left: 20px;
 }
 
+.main-container {
+  position: relative;
+}
+
 /* index styles */
 .books a {
   display: block;
@@ -157,4 +161,12 @@ textarea {
   font-family: "Font Awesome 5 Free";
   font-weight: 900;
   color: #f8ce0b;
+}
+
+/* Sort By */
+
+.sort {
+  position: absolute;
+  top: 0;
+  right: 0;
 }

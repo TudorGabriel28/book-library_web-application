@@ -7,15 +7,17 @@
   <div class="edit-book content">
     <form action="/books/<%= book._id %>" method="POST">
       <label for="title">Book title:</label>
-      <input type="text" id="title" name="title" value="<%=book.title%>" required>
+      <input type="text" name="title" value="<%=book.title%>" required>
       <label for="author">Book author:</label>
-      <input type="text" id="author" name="author" value="<%=book.author%>" required>
-      <div class="form-group">
+      <input type="text" name="author" value="<%=book.author%>" required>
+      <label for="category">Book category:</label>
+      <input type="text" name="category" value="<%= book.category %>" required>
+      <div class="rating">
         <label for="rating">Rating:</label>
-        <input type="number" value="<%= book.rating %>" step="0.1" max="5" placeholder="Rate 1 - 5" required>
+        <input type="number" name="rating" value="<%= book.rating %>" step="0.1" max="5" required>
       </div>
       <label for="description">Book description:</label>
-      <textarea id="description" name="description" required><%=book.description%></textarea>
+      <textarea name="description" required><%=book.description%></textarea>
       <button>Save Changes</button>
 
       <a class="delete-btn" data-doc="<%= book._id %>">Delete Book</a>
