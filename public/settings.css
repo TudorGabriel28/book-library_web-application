@@ -1,0 +1,65 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto&display=swap");
+@import "navbar.css";
+
+:root {
+  --primary-color: #181818;
+  --secondary-color: #212121;
+  --text-color: #f4f4f4;
+  --accent-color: #ffa001;
+}
+
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  scroll-behavior: smooth;
+}
+
+.accent-color {
+  color: #ffa001;
+}
+
+a {
+  text-decoration: none !important;
+  color: var(--text-color) !important;
+}
+
+body {
+  font-family: "Roboto", sans-serif;
+  background: url(./background.jpg);
+  background-position: center;
+  background-size: cover;
+  background-attachment: fixed;
+  color: var(--text-color) !important;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: auto;
+}
+
+.wrapper {
+  max-width: 1250px;
+  width: 100%;
+  min-height: calc(100% - 5em);
+  background: rgb(0, 0, 0, 0.7);
+}
+
+footer {
+  min-height: 5em;
+  /* background: var(--secondary-color); */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Bootstrap */
+
+.btn-outline-warning {
+  color: #ffa001 !important;
+  border-color: #ffa001 !important;
+}
+.btn-outline-warning:hover {
+  color: black !important;
+  background-color: #ffa001 !important;
+}

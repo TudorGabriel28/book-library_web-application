@@ -1,47 +1,55 @@
 <html lang="en">
 <%- include("./partials/head.ejs") %>
+<head>
+  <link rel="stylesheet" href="/details.css">
+</head>
 
 <body>
 
-  <%- include("./partials/nav.ejs") %>
 
-  <div class="details content">
+  <div class="wrapper">
+
+    <%- include("./partials/nav.ejs") %>
+
+    <div class="details-content">
     
-    <img height="450" width="300" src="<%= book.coverImagePath %>">
-
-    <h2><%= book.title %></h2>
-    <div class="content">
-      
-      <div class="author">
-        <label for="author">Author:</label>
-        <span><%= book.author %><span>
+      <div class="image">
+        <img height="450" width="300" src="<%= book.coverImagePath %>">
       </div>
-      <div class="category">
-        <label for="category">Category:</label>
-        <span><%= book.category %><span>
-      </div>
-      
-      <div class="rating">
-        <label for="rating">Rating:</label>
-        <div class="stars-outer">
-          <div class="stars-inner"></div>
+        
+      <div class="info">
+  
+        <h2 class="display-5"><%= book.title %></h2>
+  
+        <div class="author">
+          <label for="author">Author:</label>
+          <span class="accent-color"><%= book.author %><span>
         </div>
-        <span class="number-rating"><%= book.rating %></span>
-      </div>
+        <div class="category">
+          <label for="category">Category:</label>
+          <span><%= book.category %><span>
+        </div>
+        
+        <div class="rating">
+          <label for="rating">Rating:</label>
+          <div class="stars-outer">
+            <div class="stars-inner"></div>
+          </div>
+          <span class="number-rating"><%= book.rating %></span>
+        </div>
+  
+        <div class="description">
+          <label for="description">Short Description:</label>
+          <p class="description-p"><%= book.description %></p>
+        </div>
 
-      <div class="description">
-        <label for="description">Short Description:</label>
-        <p><%= book.description %></p>
+        <a class="btn btn-outline-warning edit-btn" href="/books/<%=book._id %>/edit">Edit</a>
       </div>
-
-      
       
     </div>
 
-    
-    
-    <a class="edit-btn" href="/books/<%=book._id %>/edit">Edit</a>
   </div>
+  
 
   <%- include("./partials/footer.ejs") %>
 

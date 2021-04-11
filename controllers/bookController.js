@@ -1,5 +1,5 @@
 const Book = require('../models/book');
-const imageMimeTypes = ['image/jpeg', 'image/png', 'images/gif']
+const imageMimeTypes = ['image/jpeg', 'image/png', 'images/gif'];
 
 const book_index = (req, res) => {
   
@@ -7,35 +7,29 @@ const book_index = (req, res) => {
   if(!req.query.sortby) {
     var sortCriteria = "createdAt";
   } else {
+    console.log(req.query.sortby);
     var sortCriteria = req.query.sortby;
   }
 
+  var filterCriteria = {};
+
   //Check if a category is pressed
-  if(!req.query.category) {
-    var filterCriteria = {};
-  } else {
-    var filterCriteria = {category: req.query.category};
+  if(req.query.category) {
+    filterCriteria["category"] = req.query.category;
   }
 
-  //Check if it is a search or not
-  if(!req.query.search) {
-    Book.find(filterCriteria).collation({locale: "en" }).sort({[sortCriteria] : 1})
-      .then(result => {
-        res.render('index', { books: result, title: "Library", category: req.query.category, search: false});
-      })
-      .catch(err => {
-        console.log(err);
-      });
-  } else {
-    var searchControl = { $or:[{title: { $regex: req.query.search, $options: "i" }}, {author: { $regex: req.query.search, $options: "i" }}, {category: { $regex: req.query.search, $options: "i" }}]};
-    Book.find(searchControl).sort({[sortCriteria] : 1})
-      .then(result => {
-        res.render('index', { books: result, category: req.query.category, search: true});
-      })
-      .catch(err => {
-        console.log(err);
-      });
+  if(req.query.search) {
+    filterCriteria["$or"] = [{title: { $regex: req.query.search, $options: "i" }}, {author: { $regex: req.query.search, $options: "i" }}];
+  
   }
+
+  Book.find(filterCriteria).collation({locale: "en" }).sort({[sortCriteria] : 1})
+      .then(result => {
+        res.render('index', { books: result, title: "Library", category: req.query.category, search: false, sortby: sortCriteria});
+      })
+      .catch(err => {
+        console.log(err);
+      });
   
 }
 

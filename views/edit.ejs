@@ -1,30 +1,56 @@
 <html lang="en">
 <%- include("./partials/head.ejs") %>
+<head>
+  <link rel="stylesheet" href="/edit.css">
+</head>
 
 <body>
-  <%- include("./partials/nav.ejs") %>
-
-  <div class="edit-book content">
-    <form action="/books/<%= book._id %>" method="POST">
-      <label for="title">Book title:</label>
-      <input type="text" name="title" value="<%=book.title%>" required>
-      <label for="author">Book author:</label>
-      <input type="text" name="author" value="<%=book.author%>" required>
-      <label for="category">Book category:</label>
-      <input type="text" name="category" value="<%= book.category %>" required>
-      <div class="rating">
-        <label for="rating">Rating:</label>
-        <input type="number" name="rating" value="<%= book.rating %>" step="0.1" max="5" required>
+  <div class="wrapper">
+    <%- include("./partials/nav.ejs") %>
+    <h3 class="create-book-title p-5">Edit <%= book.title %></h3>
+    <form action="/books/<%= book._id %>" method="POST" class="px-5 mx-lg-5">
+      <div class="row gx-5">
+        <div class="col-md-6 col-lg-6 pb-4">
+          <label for="title" class="text-light label-text" >Book title:</label>
+          <input type="text" name="title" class="form-control" value="<%=book.title%>" required >
+        </div>
+        <div class="col-md-6 col-lg-6 pb-4">
+          <label for="author" class="text-light label-text" >Book author:</label>
+          <input type="text" name="author" class="form-control" value="<%=book.author%>" required>
+        </div>
       </div>
-      <label for="description">Book description:</label>
-      <textarea name="description" required><%=book.description%></textarea>
-      <button>Save Changes</button>
-
-      <a class="delete-btn" data-doc="<%= book._id %>">Delete Book</a>
+      <div class="row gx-5">
+        <div class="category col-md-6 col-lg-6 pb-4">
+          <label for="category" class="text-light label-text" >Book category:</label>
+          <input type="text" name="category" class="form-control" value="<%= book.category %>" required>
+        </div>
+        <div class="col-md-6 col-lg-6 pb-4">
+          <label for="rating" class="text-light label-text">Rating:</label>
+          <input type="number" name="rating" class="form-control" value="<%= book.rating %>" step="0.1" max="5" placeholder="Rate 1 - 5"  required>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-12">
+          <label for="description" class="text-light label-text">Book description:</label>
+          <textarea id="description" name="description" class="form-control" required><%=book.description%></textarea>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-6 my-5">
+          <a class="btn btn-outline-danger text-danger  delete-btn " data-doc="<%= book._id %>">Delete Book</a>  
+        </div>
+        <div class="col-6 my-5">
+          <button type="submit" class="btn btn-outline-warning submit-button">Save Changes</button>
+        </div>
+        
+        
+      </div>
+  
     </form>
+  </div>
+  
 
     
-  </div>
 
   <%- include("./partials/footer.ejs") %>
 

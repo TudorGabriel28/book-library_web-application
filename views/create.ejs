@@ -1,30 +1,54 @@
 <html lang="en">
 <%- include("./partials/head.ejs") %>
+<head>
+  <link rel="stylesheet" href="/create.css">
+</head>
 
 <body>
-  <%- include("./partials/nav.ejs") %>
+    
 
-  <div class="create-book content">
-    <form action="/books/create" method="POST">
-      <label for="title">Book title:</label>
-      <input type="text" name="title" required>
-      <label for="author">Book author:</label>
-      <input type="text" name="author" required>
-      <label for="category">Book category:</label>
-      <input type="text" name="category" required>
-      <div class="rating">
-        <label for="rating">Rating:</label>
-        <input type="number" name="rating"  step="0.1" max="5" placeholder="Rate 1 - 5" required>
+  <div class="wrapper">
+    <%- include("./partials/nav.ejs") %>
+    <h3 class="create-book-title py-3 px-5">Create a new Book:</h3>
+    <form action="/books/create" method="POST" class="form-container">
+
+      <div class="row">
+        <div class="cover col-lg-4">
+          <div class="flex-item">
+            <label class="text-light label-text">Cover</label>
+            <input type="file" name="cover" class="cover-input filepond ">
+          </div>
+          
+        </div>
+        <div class="col-lg-6 offset-lg-2">
+          <div class="title py-5">
+            <label for="title" class="text-light label-text">Book title:</label>
+            <input type="text" name="title" class="form-control" required >
+          </div>
+          <div class="author pb-5">
+            <label for="author" class="text-light label-text">Book author:</label>
+            <input type="text" name="author" class="form-control" required>
+          </div>
+          <div class="category pb-5">
+            <label for="category" class="text-light label-text">Book category:</label>
+            <input type="text" name="category" class="form-control" required>
+          </div>
+          <div class="rating">
+            <label for="rating" class="text-light label-text">Rating:</label>
+            <input type="number" name="rating"  step="0.1" max="5" placeholder="Rate 1 - 5" class="form-control" required>
+          </div>
+        </div>
       </div>
-      <label for="description">Book description:</label>
-      <textarea id="description" name="description" required></textarea>
-      <div>
-        <label>Cover</label>
-        <input type="file" name="cover" class="filepond">
+      <div class="description row">
+        <label for="description" class="text-light label-text">Book description:</label>
+        <textarea id="description" name="description" class="form-control" required></textarea>
       </div>
-      <button>Submit</button>
+      <button type="submit" class="btn btn-outline-warning submit-button m-5">Submit</button>
+      
     </form>
   </div>
+
+  
 
   <%- include("./partials/footer.ejs") %>
 

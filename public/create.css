@@ -1,0 +1,33 @@
+@import "settings.css";
+
+.create-book-title {
+  color: #ffa001;
+  padding: 1em 0 0 2em;
+}
+
+.label-text {
+  font-size: 1.2rem;
+  padding-bottom: 0.2em;
+}
+.cover {
+  display: flex;
+  justify-content: center;
+}
+
+.cover-input {
+  width: 300px;
+  height: 300px;
+}
+
+#description {
+  height: 8em;
+}
+
+.submit-button {
+  float: right;
+}
+.form-container {
+  position: relative;
+  width: 100%;
+  padding: 0 15%;
+}

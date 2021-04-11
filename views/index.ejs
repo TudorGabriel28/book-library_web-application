@@ -1,96 +1,114 @@
 <html lang="en">
 <%- include("./partials/head.ejs") %>
+<head>
+  <link rel="stylesheet" href="/index.css">
+</head>
 
 <body>
 
-  <style>
-  
-  .feedback-positive::before {
-    content: "\f164";
-    font-family: "Font Awesome 5 Free";
-    font-weight: 900;
-    color: #66bf64;
-  }
-  .feedback-negative::before {
-    content: "\f165";
-    font-family: "Font Awesome 5 Free";
-    font-weight: 900;
-    color: rgb(255, 85, 85);
-  }
-  </style>
+  <div class="wrapper">
+    <%- include("./partials/nav.ejs") %>
 
-  <%- include("./partials/nav.ejs") %>
-
+    <main>
   
-  <div class="main-container">
-    <form id="sort" action="/books" method="GET">
-      <div class="sort">
-        <select  name="sortby" onchange="myFunction()" >
-            <option value="0" disabled selected>Sort By</option>
-            <option value="createdAt" >Date Created</option>
-            <option value="title" >Title</option>
-            <option value="author" >Author</option>
-            <option value="rating" >Rating</option>
+      <form class="form-inline mr-5 search-bar" action="/books" method="GET">
+        <input class="form-control mr-sm-2" type="text" name="search" placeholder="Search" aria-label="Search">
+        <button class="btn search-btn" type="submit">
+          <i class="fas fa-search"></i>
+        </button>
+      </form>
+      
+      <div class="dropdown">
+        <select  name="sortby" id="sort" class="btn btn-light"  onchange="sortBy()" >
+
+          <%
+          var options = [{value: "createdAt", label: "Date Created"} , {value: "title", label: "Title"}, {value: "author", label: "Author"}, {value: "rating", label: "Rating"} ];
+          for ( var i = 0; i < options.length; i++ )
+          {
+              var selected = ( sortby == options[i].value ) ? "selected" : "";
+              %><option value="<%=options[i].value %>" <%=selected %>><%=options[i].label %></option><%
+          }
+          %>
           </select>
       </div>
-    </form>
-    
-
-    <div class="books content">
-      <% if(category) { %>
-        <h2><%= category %></h2>
-      <% } else { %>
-        <h2>All books</h2>
-      <% } %>
-      
   
-      <% if (books.length > 0) { %>
-        <% 
-          books.forEach(book => { %>
-            <a class="single" href="/books/<%= book._id %>">
-              <h3 class="title"><%= book.title %></h3>
-              <p class="author"><%= book.author %></p>
-              <p class="category"><%= book.category %></p>
-              <%if( Math.round((book.rating * 100)/5) < 50 ) { %>
-                <div class="feedback-negative">
-                <%= Math.round((book.rating * 100)/5) %>% Negative Feedback
+      <div class="category-container">
+    
+        <% if(category) { %>
+          <h2 class="category-title"><%= category %></h2>
+        <% } else { %>
+          <h2 class="category-title">All books</h2>
+        <% } %>
+    
+        <ul class="category-list">
+          <%
+          if(!search) {
+            var categories = []; 
+            books.forEach(book => {
+              if((categories.includes(book.category)) == false && book.category != category) {
+                categories.push(book.category) %>
+                <li class="category-item"><a href="/books?category=<%= book.category %>" class="category-link"><%= book.category %></a></li>
+          <% }})} %>
+        </ul>
+        
+              
+      </div>
+    
+      <div class="books-container">
+        
+        <% if (books.length > 0) { %>
+          <% 
+            books.forEach(book => { %>
+              <a class="book-preview" href="/books/<%= book._id %>">
+                <div class="image">
+                  <img height="225" width="150" src="<%= book.coverImagePath %>">
                 </div>
-              <% } else { %>
-                <div class="feedback-positive">
-                  <%= Math.round((book.rating * 100)/5) %>% Positive Feedback
+                <div class="info">
+                  <p class="field title my-0"><%= book.title %></p>
+                  <p class="field author my-0">Author: <%= book.author %></p>
+                  <p class="field category my-0">Category: <%= book.category %></p>
+                  <%if( Math.round((book.rating * 100)/5) < 50 ) { %>
+                    <div class="field feedback-negative my-0">
+                    <%= Math.round(100 - (book.rating * 100)/5) %>% Negative Feedback
+                    </div>
+                  <% } else { %>
+                    <div class="field feedback-positive my-0">
+                      <%= Math.round((book.rating * 100)/5) %>% Positive Feedback
+                    </div>
+                  <% } %>
                 </div>
-              <% } %>
-              <img height="225" width="150" src="<%= book.coverImagePath %>">
-            </a>
-          <% }) %>
-
-          <div class="categories-container">
-            <%
-              if(!search) {
-                var categories = []; 
-                books.forEach(book => {
-                  if((categories.includes(book.category)) == false && book.category != category) {
-                    categories.push(book.category) %>
-                    <a href="/books?category=<%= book.category %>" class="category"><%= book.category %></a> 
-            <% }})} %>
-                  
-          </div>
-          
-      <% } else { %>
-        <p>There are no books to display...</p>
-      <% } %>
-      
-    </div>
+              
+              </a>
+            <% }) %>
+    
+        <% } else { %>
+          <p>There are no books to display...</p>
+        <% } %>
+        
+      </div>
+  
+    </main>
   </div>
+  
+  
+  
   
 
   <%- include("./partials/footer.ejs") %>
 
+
+  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+  
   <script>
-    function myFunction() {
-      document.getElementById('sort').submit();
+    function sortBy() {
+      const value = document.getElementById('sort').value;
+      var queryParams = new URLSearchParams(window.location.search);
+      queryParams.set("sortby", value);
+      history.pushState(null, null, "?" + queryParams.toString());
+      location.reload();
     }
-    
   </script>
 </body>
 </html>

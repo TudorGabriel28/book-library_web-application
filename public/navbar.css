@@ -1,0 +1,29 @@
+/* Navigation Bar */
+.navbar {
+  position: sticky;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: var(--secondary-color);
+  color: var(--text-color);
+}
+
+.logo {
+  padding-left: 5%;
+}
+.navlist {
+  padding-right: 5%;
+}
+
+.navlist-item {
+  display: inline-block;
+  list-style: none;
+  padding: 0 2em;
+}
+
+.navlist-link {
+  text-decoration: none;
+  font-size: 1.2em;
+  color: inherit;
+}

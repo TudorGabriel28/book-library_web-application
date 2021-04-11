@@ -1,0 +1,114 @@
+@import "settings.css";
+
+main {
+  position: relative;
+  display: flex;
+  flex: 1 0 auto;
+}
+
+/* Index Page */
+
+/* Search Bar */
+
+.search-bar {
+  position: absolute;
+  top: 3em;
+  right: 15em;
+  display: flex;
+  flex-shrink: 0;
+}
+.search-btn {
+  background-color: var(--accent-color) !important;
+}
+
+/* Sort by button */
+.dropdown {
+  position: absolute !important;
+  top: 3em;
+  right: 2.5em;
+}
+
+/* Categories */
+
+.category-container {
+  display: flex;
+  flex-direction: column;
+  flex-shrink: 0;
+  padding: 0 2.5em;
+}
+
+.category-title {
+  font-size: 2em;
+  padding: 1em 0;
+  text-transform: capitalize;
+  color: var(--accent-color);
+}
+
+.category-item {
+  display: block;
+  padding: 0.5em 0;
+}
+
+.category-link {
+  font-size: 1.2em;
+  text-decoration: none;
+  text-transform: capitalize;
+  color: inherit;
+  transition: all 0.2s ease-out;
+}
+
+.category-link:hover {
+  color: var(--accent-color) !important;
+}
+
+/* Books */
+.books-container {
+  padding-top: 7em;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.book-preview {
+  padding: 2.5em;
+  display: block;
+}
+
+.book-preview .info .field {
+  padding: 0.1em 0 !important;
+}
+
+.title {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 23ch;
+}
+
+.author,
+.category {
+  text-transform: capitalize;
+}
+
+.book-preview .info .title {
+  font-size: 1.6em;
+}
+
+.book-preview .image img {
+  margin-bottom: 1em;
+
+  border: 5px solid #333;
+}
+
+/*  Feedback icons */
+.feedback-positive::before {
+  content: "\f164";
+  font-family: "Font Awesome 5 Free";
+  font-weight: 900;
+  color: #66bf64;
+}
+.feedback-negative::before {
+  content: "\f165";
+  font-family: "Font Awesome 5 Free";
+  font-weight: 900;
+  color: rgb(255, 85, 85);
+}
