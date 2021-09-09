@@ -4,7 +4,7 @@
   "description": "A web application that lets users manage a book library.",
   "main": "app.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node app.js"
   },
   "author": "Tudor Gabriel",
   "license": "ISC",
